@@ -1,0 +1,28 @@
+# .github/workflows/deploy-gcp.yml
+name: Deploy to GCP without Secrets
+
+on:
+  push:
+    branches: [ master ]
+
+permissions:
+  id-token: write  # Required to use OIDC token
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: "projects/88837817671/locations/global/workloadIdentityPools/demo-pool/providers/Github"
+          service_account: "terraform-sa@trans-array-458210-u2.iam.gserviceaccount.com"
+
+      - name: Use gcloud
+        run: gcloud info
