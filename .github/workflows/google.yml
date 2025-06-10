@@ -21,7 +21,7 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           token_format: 'access_token'
-          workload_identity_provider: "projects/88837817671/locations/global/workloadIdentityPools/demo-pool/providers/Github"
+          workload_identity_provider: "https://iam.googleapis.com/projects/88837817671/locations/global/workloadIdentityPools/demo-pool/providers/github"
           service_account: "terraform-sa@trans-array-458210-u2.iam.gserviceaccount.com"
 
       - name: Use gcloud
