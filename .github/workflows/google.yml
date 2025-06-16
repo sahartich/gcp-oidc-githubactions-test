@@ -24,5 +24,20 @@ jobs:
           workload_identity_provider: "projects/88837817671/locations/global/workloadIdentityPools/demo-pool/providers/github"
           service_account: "terraform-sa@trans-array-458210-u2.iam.gserviceaccount.com"
 
-      - name: Use gcloud
-        run: gcloud info
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 'latest'
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Format
+        run: terraform fmt -check
+
+      - name: Terraform Plan
+        run: terraform plan -input=false
+
+      - name: Terraform Apply
+        # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
