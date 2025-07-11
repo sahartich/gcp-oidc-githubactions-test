@@ -3,7 +3,7 @@ name: Deploy to GCP without Secrets
 
 on:
   push:
-    branches: [ master ]
+    branches: [ staging ]
 
 permissions:
   id-token: write  # Required to use OIDC token
