@@ -44,3 +44,24 @@ jobs:
       - name: Terraform Apply
         # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
+        
+  merge_to_master:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master branch
+        uses: actions/checkout@v4
+        with:
+          ref: master # Checkout the 'master' branch
+          token: ${{ secrets.TOKEN_GITHUB }}
+
+      - name: Merge staging into main
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions-bot@users.noreply.github.com"
+          git pull origin staging --no-ff --commit -m "Automated: Merge staging into master"
+          # --no-ff ensures a merge commit is always created, preserving history
+          # --commit makes it create the commit immediately
+          # If a conflict occurs, this step will fail.
+
+      - name: Push merged main to origin
+        run: git push origin main
