@@ -61,7 +61,5 @@ jobs:
       - name: git config user email
         run: git config user.email "github-actions-bot@users.noreply.github.com"
 
-      - name: git pull origin staging --no-ff --commit
-
-      - name: Push merged main to origin1
-        run: git push origin main
+      - name: git pull
+        run: git pull origin staging --no-ff --commit
