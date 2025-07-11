@@ -12,6 +12,9 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: 
+      name: production
+      url: https://www.hello-world.com/ #just to test the functionality
 
     steps:
       - name: Checkout code
