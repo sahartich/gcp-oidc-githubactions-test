@@ -7,7 +7,7 @@ on:
 
 permissions:
   id-token: write  # Required to use OIDC token
-  contents: read
+  contents: write
 
 jobs:
   deploy:
@@ -63,3 +63,6 @@ jobs:
 
       - name: git pull
         run: git pull origin staging --no-ff --commit
+      
+      - name: git push
+        run: git push origin master
