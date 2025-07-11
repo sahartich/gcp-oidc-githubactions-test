@@ -63,5 +63,5 @@ jobs:
 
       - name: git pull origin staging --no-ff --commit
 
-      - name: Push merged main to origin
+      - name: Push merged main to origin1
         run: git push origin main
